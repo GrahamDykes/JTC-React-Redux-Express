@@ -7,12 +7,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json())
-// app.use(bodyParser.json());
-
-
-app.use((req,res)=>{
-    // console.log('Request:\n:',req)
-})
 
 
 app.get('/', (req, res) => {
@@ -21,8 +15,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/todos', (req,res)=>{
-    console.log('request recieved for todos')
-    res.json([
+    console.log('ping detected')
+    res.send([
         {id:1, task:'Learn React', completed:false},
         {id:2, task:'Learn Express', completed:false}
     ])
