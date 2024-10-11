@@ -40,7 +40,26 @@ app.post("/api/todos", (req, res) => {
 
 app.put("/api/todos/:id", (req, res) => {
   console.log("\n\nUpdate Recieved:\n", req.params);
-  todos[parseInt(req.params.id)].completed = !todos[parseInt(req.params.id)].completed;
+  todos[parseInt(req.params.id)].completed =
+    !todos[parseInt(req.params.id)].completed;
+  res.send(todos);
+});
+app.delete("/api/todos/:id", (req, res) => {
+  console.log("\nDelete Recieved:\n", req.params);
+  let deleted = todos.filter((e) => e.id != parseInt(req.params.id));
+  console.log("Deleted:\n", deleted);
+  //  let x = deleted.forEach((e,i)=> e.id = i)
+  //  todos = x
+  // console.log('Todos:\n',todos)
+  todos = [];
+  deleted.forEach((e, i) => {
+    todos.push({
+      id: i,
+      task: e.task,
+      completed: e.completed,
+    });
+  });
+  console.log("Todos:\n", todos);
   res.send(todos);
 });
 
